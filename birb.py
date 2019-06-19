@@ -54,8 +54,8 @@ def contains_multi_subterms(search_list, search_text):
 	for sub_term in search_list:
 		if sub_term not in search_text:
 			return False
-		else:
-			return True
+	else:
+		return True
 
 def main():
 	#get the rss feed
