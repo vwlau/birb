@@ -5,4 +5,4 @@ Description = run birb.py minutely
 OnCalendar = minutely
 
 [Install]
-Wantedby = timers.target
+WantedBy = timers.target
