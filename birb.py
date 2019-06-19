@@ -67,7 +67,6 @@ def main():
 	#iterate through all the posts 
 	for post in feed.entries:
 		if post_not_in_db(post['title'], post['id']):
-			#print(post['title'])
 			add_post_to_db(post['title'], post['id'])
 			for term in search_terms:
 				if(len(term.split())>1): #if search term is more than one word
