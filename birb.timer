@@ -1,0 +1,8 @@
+[Unit]
+Description = run birb.py minutely
+
+[Timer]
+OnCalendar = minutely
+
+[Install]
+Wantedby = timers.target
