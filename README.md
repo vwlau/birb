@@ -5,13 +5,20 @@ Reads the rss feed of reddit.com/r/mechmarket/new.rss and pushes a notification 
 birb.timer and birb.service go in /etc/systemd/system
 
 To start:
+
 systemctl daemon-reload
+
 systemctl enable birb.service
+
 systemctl enable birb.timer
+
 systemctl start birb.timer
 
 Check status:
+
 sudo systemctl status birb.service
+
 and/or
+
 systemctl list-timers --all
 
