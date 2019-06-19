@@ -1,6 +1,6 @@
 # birb
 
-Reads the rss feed of reddit.com/r/mechmarket/new.rss and pushes a notification using PushBullet whenever a post shows up that has keyword(s) specified in search_terms.txt
+Reads the rss feed of reddit.com/r/mechmarket/new/.rss and pushes a notification using PushBullet whenever a post shows up that has keyword(s) specified in search_terms.txt
 
 birb.timer and birb.service go in /etc/systemd/system
 
