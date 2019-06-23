@@ -7,12 +7,18 @@ to exit virtual environement, type:
 deactivate
 '''
 
+import os
 import feedparser
 import sqlite3
+import json
 from pushbullet import Pushbullet
 
+dn = os.path.dirname(os.path.realpath(__file__))
+db_file = os.path.join(dn, 'mechmarket.sqlite')
+json_file = os.path.join(dn, 'search_terms.json')
+
 #connects to sqlite database
-db_connection = sqlite3.connect('/path/to/db/mechmarket.sqlite')
+db_connection = sqlite3.connect(db_file)
 cur = db_connection.cursor()
 #creates the database and table if it doesn't already exist
 cur.execute('CREATE TABLE IF NOT EXISTS posts (title TEXT, id TEXT)')
@@ -32,18 +38,24 @@ def add_post_to_db(post_title, post_id):
 
 #sends pushbullet a notification
 def send_pb_note(title, msg):
-	ACCESS_TOKEN = 'Your PushBullet Access Token Here'
+	ACCESS_TOKEN = 'o.0YBtUUcyw4Ctgu6kOvmQLfchsWiw0cSc'
 
 	pb = Pushbullet(ACCESS_TOKEN)
 	push = pb.push_note(title, msg)
 
-#retrieves all keywords to search for from file and returns a list of search terms to use
-def get_search_terms(file):
+#depreciated in favor of storing in a json file
+'''def get_search_terms(file):
 	f = open(file, 'r')
 	search_terms = f.readlines()
 	search_terms = [terms.rstrip() for terms in search_terms] #remove the '\n' char
 	f.close()
-	return search_terms
+	return search_terms'''
+
+#retrieves all keywords to search for from file and returns a list of search terms to use
+def load_json(json_file):
+	with open(json_file, "r") as read_file:
+		data = json.load(read_file)
+		return data['terms']
 
 #returns true if search term is in search text, false if not
 def contains_search_term(search_term, search_text):
@@ -62,11 +74,12 @@ def main():
 	feed = feedparser.parse("https://www.reddit.com/r/mechmarket/new/.rss")
 
 	#get the search terms
-	search_terms = get_search_terms('/path/to/search/terms/search_terms.txt')
+	search_terms = load_json(json_file)
 
 	#iterate through all the posts 
 	for post in feed.entries:
 		if post_not_in_db(post['title'], post['id']):
+			#print(post['title']) for debugging
 			add_post_to_db(post['title'], post['id'])
 			for term in search_terms:
 				if(len(term.split())>1): #if search term is more than one word
@@ -78,3 +91,11 @@ def main():
 if __name__ == '__main__':
 	main()
 	db_connection.close()
+
+
+#entry = feed.entries[0]
+#print(entry['id'])
+#print("ctrl" in entry['summary'].lower()) 
+
+# entry.keys()
+# 'authors', 'author_detail', 'href', 'author', 'tags', 'content', 'summary', 'id', 'guidislink', 'link', 'links', 'updated', 'updated_parsed', 'title', 'title_detail'
