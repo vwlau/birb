@@ -38,7 +38,7 @@ def add_post_to_db(post_title, post_id):
 
 #sends pushbullet a notification
 def send_pb_note(title, msg):
-	ACCESS_TOKEN = 'o.0YBtUUcyw4Ctgu6kOvmQLfchsWiw0cSc'
+	ACCESS_TOKEN = 'YOUR ACCESS TOKEN HERE'
 
 	pb = Pushbullet(ACCESS_TOKEN)
 	push = pb.push_note(title, msg)
