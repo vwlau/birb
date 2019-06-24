@@ -91,11 +91,3 @@ def main():
 if __name__ == '__main__':
 	main()
 	db_connection.close()
-
-
-#entry = feed.entries[0]
-#print(entry['id'])
-#print("ctrl" in entry['summary'].lower()) 
-
-# entry.keys()
-# 'authors', 'author_detail', 'href', 'author', 'tags', 'content', 'summary', 'id', 'guidislink', 'link', 'links', 'updated', 'updated_parsed', 'title', 'title_detail'
