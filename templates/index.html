@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<meta charset='UTF-8'>
+	<title>Todo App</title>
+</head>
+<body>
+	<h1>Birb Search Terms</h1>
+	<div>Add a new search term: 
+		<form action="{{ url_for('add') }}" method='POST'>
+			<input type='text' name='searchterm'>
+			<input type='submit' value='Add search term'>
+		</form><br>
+	</div>
+	<div style='font-size: 14pt'>
+		<form action="{{ url_for('delete') }}" method='POST'>
+				{% for term in terms_list %}
+				<input type='checkbox' name='{{term}}'> {{term}}<br>
+				{% endfor %}
+			<br>
+			<input type='submit' value='Delete Items'>
+		</form>
+	</div>
+</body>
+</html>
