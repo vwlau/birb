@@ -1,0 +1,9 @@
+[Unit]
+Description = uWSGI instance to service web_birb.py
+After = network.target
+
+[Service]
+ExecStart = /bin/bash -c 'cd home/pi/birb; source venv/bin/activate; uwsgi --ini uwsgi.ini'
+
+[Install]
+WantedBy = multi-user.target
