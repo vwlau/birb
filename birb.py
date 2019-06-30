@@ -64,7 +64,7 @@ def contains_search_term(search_term, search_text):
 #returns true if multiple search terms are all in search text, false if not
 def contains_multi_subterms(search_list, search_text):
 	for sub_term in search_list:
-		if sub_term not in search_text:
+		if sub_term not in search_text.lower():
 			return False
 	else:
 		return True
